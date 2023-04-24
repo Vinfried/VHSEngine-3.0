@@ -43,6 +43,9 @@ public:
 	//screen and camera coordinates
 	void ApplyScreenTransformations(ShaderPtr Shader);
 
+	//remove model from the model stack
+	void RemoveModel(ModelPtr ModelToRemove);
+
 private:
 	//this will hold the window
 	SDL_Window* SdlWindow;

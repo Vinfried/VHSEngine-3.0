@@ -7,6 +7,7 @@
 #include "VHSEngine/Graphics/Texture.h"
 #include "VHSEngine/Graphics/Camera.h"
 #include "VHSEngine/Graphics/Material.h"
+#include "VHSEngine/Collisions/Collision.h"
 
 GraphicsEngine::GraphicsEngine()
 {
@@ -101,7 +102,7 @@ bool GraphicsEngine::InitGE(const char* WTitle, bool bFullScreen, int WWidth, in
 	glEnable(GL_DEPTH_TEST);
 
 	//create the default engine texture
-	DefaultEngineTexture = CreateTexture("Game\Textures\GreyTexture.png");
+	DefaultEngineTexture = CreateTexture("Game/Textures/GreyTexture.png");
 	//create the default engine material
 	//materials when create auto assign the default texture
 	DefaultEngineMaterial = make_shared<Material>();
@@ -126,16 +127,16 @@ void GraphicsEngine::ClearGraphics()
 
 void GraphicsEngine::Draw()
 {
-	ClearGraphics();
-
 	HandleWireFrameMode(false);
+
+	/*static BoxCollisionPtr Col = make_shared<BoxCollision>(Vector3(0.0f), Vector3(0.0f), Vector3(3.0f));
+
+	Col->DebugDraw(Vector3(255.0f, 0.0f, 0.0f));*/
 
 	//run through each mesh and call its draw method
 	for (ModelPtr LModel : ModelStack) {
 		LModel->Draw();
 	}
-
-	PresentGraphics();
 }
 
 SDL_Window* GraphicsEngine::GetWindow() const
@@ -246,6 +247,21 @@ void GraphicsEngine::ApplyScreenTransformations(ShaderPtr Shader)
 
 	Shader->SetMat4("view", view);
 	Shader->SetMat4("projection", projection);
+}
+
+void GraphicsEngine::RemoveModel(ModelPtr ModelToRemove)
+{
+	//looking for the model iin the model stack vector array
+	// we look through the whole vector and if we find the value then we assign the correct index
+	//this will equal /end() id it doesn't exist in the stack
+	ModelPtrStack::iterator ModelIndex = find(ModelStack.begin(), ModelStack.end(), ModelToRemove);
+	
+	if (ModelIndex == ModelStack.end()) {
+		return;
+	}
+
+	//use the iterator index to erase the object
+	ModelStack.erase(ModelIndex);
 }
 
 void GraphicsEngine::HandleWireFrameMode(bool bShowWireframeMode)

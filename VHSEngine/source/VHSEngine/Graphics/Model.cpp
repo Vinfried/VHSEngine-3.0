@@ -2,6 +2,7 @@
 #include "VHSEngine/Graphics/Mesh.h"
 #include "VHSEngine/Game.h"
 #include "VHSEngine/Graphics/Vertex.h"
+#include "VHSEngine/Collisions/Collision.h"
 //ASSIMP HEADERS
 #include "assimp/Importer.hpp"
 #include "assimp/scene.h"
@@ -11,6 +12,7 @@
 Model::Model()
 {
 	ModelFilePath = "";
+	ModelCollision = nullptr;
 }
 
 Model::~Model()
@@ -60,7 +62,6 @@ bool Model::ImportMeshFromFile(const char* ImportFilePath, ShaderPtr ModelShader
 	if (!Scene || Scene->mFlags == AI_SCENE_FLAGS_INCOMPLETE || !Scene->mRootNode) {
 		cout << "Model | Error importing model from " << ImportFilePath << " - " << Importer.GetErrorString() << endl;
 		return false;
-
 	}
 
 	//assign the model shader
@@ -82,6 +83,10 @@ bool Model::ImportMeshFromFile(const char* ImportFilePath, ShaderPtr ModelShader
 
 void Model::Draw()
 {
+	if (ModelCollision != nullptr) {
+		ModelCollision->SetLocation(Transform.Location);
+	}
+
 	//cycle through the meshes and draw each e=one
 	for (MeshPtr LMesh : MeshStack) {
 		//assign the model transformations to the mesh
@@ -112,6 +117,13 @@ MaterialPtr Model::GetMaterialBySlot(vhsuint SlotIndex) const
 		return nullptr;
 	}
 	return MaterialStack[SlotIndex];
+}
+
+CollisionPtr Model::AddCollisionToModel(Vector3 Dimentions, Vector3 Offset)
+{
+	ModelCollision = make_shared<BoxCollision>(Transform.Location, Offset, Dimentions);
+
+	return ModelCollision;
 }
 
 void Model::FindAndImportSceneMeshes(aiNode* Node, const aiScene* Scene)

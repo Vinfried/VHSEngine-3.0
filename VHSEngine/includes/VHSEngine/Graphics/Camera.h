@@ -1,5 +1,6 @@
 #pragma once
 #include "VHSEngine/Math/Transformations.h"
+#include "VHSEngine/CoreMinimal.h"
 
 struct STCameraData {
 
@@ -18,7 +19,7 @@ struct STCameraData {
 	float FarClip = 1000.0f;
 
 	//speed which carema turn is multipled
-	float LookSensitivity = 100.0f;
+	float LookSensitivity = 0.2f;
 };
 
 class Camera {
@@ -50,6 +51,12 @@ public:
 	//rotate camera based on YAW
 	void RotateYaw(float Amount);
 
+	//update camera logic
+	void Update();
+
+	//get the collision for camera
+	CollisionPtr GetCameraCollision() const { return CameraCollision; }
+
 private:
 
 	//find the current directions vectors based on the rotation of the YAW and PITCH of the camera
@@ -65,4 +72,7 @@ private:
 
 	//hold all the extra camera info
 	STCameraData CameraData;
+
+	//add a camerac collision
+	CollisionPtr CameraCollision;
 };

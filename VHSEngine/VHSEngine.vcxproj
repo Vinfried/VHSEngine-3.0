@@ -134,6 +134,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="includes\stb_image\stb_image.h" />
+    <ClInclude Include="includes\VHSEngine\Collisions\Collision.h" />
     <ClInclude Include="includes\VHSEngine\CoreMinimal.h" />
     <ClInclude Include="includes\VHSEngine\Game.h" />
     <ClInclude Include="includes\VHSEngine\Graphics\Camera.h" />
@@ -150,6 +151,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game\Source.cpp" />
+    <ClCompile Include="source\VHSEngine\Collisions\Collision.cpp" />
     <ClCompile Include="source\VHSEngine\Graphics\Camera.cpp" />
     <ClCompile Include="source\VHSEngine\Graphics\Material.cpp" />
     <ClCompile Include="source\VHSEngine\Graphics\Mesh.cpp" />
@@ -163,10 +165,15 @@
     <ClCompile Include="source\VHSEngine\Input.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\..\..\..\Downloads\PrimitiveModels\Cube.fbx" />
+    <None Include="..\..\..\..\..\Downloads\PrimitiveModels\Plane.fbx" />
+    <None Include="..\..\..\..\..\Downloads\PrimitiveModels\Sphere.fbx" />
     <None Include="Game\Shaders\TextureShader\TextureShader.sfrag" />
     <None Include="Game\Shaders\TextureShader\TextureShader.svert" />
     <None Include="Game\Shaders\VertexShader\VertexShader.sfrag" />
     <None Include="Game\Shaders\VertexShader\VertexShader.svert" />
+    <None Include="Game\Shaders\WireframeShader\WireframeShader.sfrag" />
+    <None Include="Game\Shaders\WireframeShader\WireframeShader.svert" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

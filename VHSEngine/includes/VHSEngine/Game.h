@@ -33,6 +33,9 @@ public:
 	//return the graphics engine default material
 	MaterialPtr GetDefaultEngineMaterial();
 
+	//remove a model from everywhere it needs to be removed
+	void RemoveModelFromGame(ModelPtr& ModelToRemove);
+
 private:
 	Game();
 	~Game();

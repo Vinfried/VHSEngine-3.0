@@ -57,6 +57,9 @@
     <ClInclude Include="includes\VHSEngine\Graphics\Model.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="includes\VHSEngine\Collisions\Collision.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="source\stb_image\stb_image.cpp">
@@ -95,11 +98,19 @@
     <ClCompile Include="source\VHSEngine\Graphics\Model.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="source\VHSEngine\Collisions\Collision.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="Game\Shaders\VertexShader\VertexShader.svert" />
     <None Include="Game\Shaders\VertexShader\VertexShader.sfrag" />
     <None Include="Game\Shaders\TextureShader\TextureShader.sfrag" />
     <None Include="Game\Shaders\TextureShader\TextureShader.svert" />
+    <None Include="Game\Shaders\WireframeShader\WireframeShader.sfrag" />
+    <None Include="Game\Shaders\WireframeShader\WireframeShader.svert" />
+    <None Include="..\..\..\..\..\Downloads\PrimitiveModels\Sphere.fbx" />
+    <None Include="..\..\..\..\..\Downloads\PrimitiveModels\Cube.fbx" />
+    <None Include="..\..\..\..\..\Downloads\PrimitiveModels\Plane.fbx" />
   </ItemGroup>
 </Project>

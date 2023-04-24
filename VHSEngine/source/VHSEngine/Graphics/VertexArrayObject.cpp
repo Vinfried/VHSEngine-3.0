@@ -213,7 +213,7 @@ void VertexArrayObject::Draw()
 	//Draw the 3d object/VAO
 	glDrawElements(
 		GL_TRIANGLES,					//what type of objects are we drawing
-		Shape.IndicesMatrix.size(),		//how many vertices do we draw
+		IndicesToUse.size(),		//how many vertices do we draw
 		GL_UNSIGNED_INT,				//what is the type of data that's being input
 		(void*)0						//how many should we skip
 	);
